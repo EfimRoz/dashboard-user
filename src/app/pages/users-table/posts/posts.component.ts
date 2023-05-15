@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserPosts } from 'src/app/models/posts.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-posts',
@@ -7,10 +9,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent {
-  postId: any = 0;
-  constructor(private route: ActivatedRoute) {
-    const navigationParams: any = this.route.params;
-    this.postId = navigationParams['id'];
+  posts: UserPosts[];
+  constructor(private route: ActivatedRoute, private userService: UsersService) {
+    this.posts = [];
+    const navigationParams = this.route.snapshot.queryParams;
+    const postId = navigationParams['userId'];
+    this.userService.getPosts(postId).subscribe( userPosts => {
+      this.posts = userPosts;
+    });
   }
 
 }

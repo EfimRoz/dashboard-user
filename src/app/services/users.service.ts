@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { User } from '../models/user.model';
+import { UserPosts } from '../models/posts.model';
 
 export const jsonplaceholderUrl = 'https://jsonplaceholder.typicode.com';
 
@@ -23,6 +24,11 @@ export class UsersService {
     //     });
     //   return users;
     // }));
+  }
+
+  getPosts(userId: string): Observable<UserPosts[]> {
+    const userPostsUrl = jsonplaceholderUrl + '/posts?userId=' + userId;
+    return this.http.get<UserPosts[]>(userPostsUrl);
   }
   //TODO
 }

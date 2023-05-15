@@ -51,7 +51,7 @@
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr routerLink="/posts" [queryParams]="{ id: row.id }" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr routerLink="/posts" [queryParams]="{ userId: row.id }" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   
   
